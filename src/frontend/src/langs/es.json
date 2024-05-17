@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "btn": {
+      "login": "Comenzar",
+      "loginLong": "Inicia sesión para comenzar",
+      "logout": "Cerrar sesión",
+      "dashboardLinks": "Mis links",
+      "short": "Chop"
+    },
+    "home": {
+      "title": "Almacena y gestiona tus enlaces",
+      "description": "Chopchop url es un proyecto de código abierto el cual permite mejorar la gestión de los enlaces del usuario. Inicia sesión para personalizar, gestionar y almacenar permanentemente tus enlaces.",
+      "timeLimit": "Los enlaces creados sin una cuenta personal estarán disponibles por 24 horas."
+    }
+  }
+}

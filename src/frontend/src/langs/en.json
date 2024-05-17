@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "btn": {
+      "login": "Get started",
+      "loginLong": "Sign in to get started",
+      "logout": "Sign Out",
+      "dashboardLinks": "My links",
+      "short": "Chop"
+    },
+    "home": {
+      "title": "Store and manage all your links",
+      "description": "Chopchop url is an open source project which allows to improve the user's link management. Log in to customize, manage and permanently store your links.",
+      "timeLimit": "Links created without a personal account will be available for 24 hours."
+    }
+  }
+}
