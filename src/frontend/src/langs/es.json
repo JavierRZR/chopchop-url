@@ -5,12 +5,24 @@
       "loginLong": "Inicia sesión para comenzar",
       "logout": "Cerrar sesión",
       "dashboardLinks": "Mis links",
-      "short": "Chop"
+      "short": "Chop",
+      "createLink": "Crear link"
     },
     "home": {
       "title": "Almacena y gestiona tus enlaces",
       "description": "Chopchop url es un proyecto de código abierto el cual permite mejorar la gestión de los enlaces del usuario. Inicia sesión para personalizar, gestionar y almacenar permanentemente tus enlaces.",
       "timeLimit": "Los enlaces creados sin una cuenta personal estarán disponibles por 24 horas."
+    },
+    "dashboard": {
+      "myLinks": "Mis enlaces"
+    },
+    "link": {
+      "copyPassword": "Clica para copiar contraseña",
+      "noPassword": "Link sin contraseña",
+      "visited": "visitas"
+    },
+    "notification": {
+      "copiedToCB": "Copiado en el portapeles"
     }
   }
 }

@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="button"
-      className={`flex flex-row items-center justify-between gap-2 rounded-md border border-neutral-300 p-2 px-3 text-neutral-400 duration-300 hover:scale-105 hover:bg-neutral-300 dark:border-neutral-700 dark:hover:bg-neutral-700
+      className={`flex select-none flex-row items-center justify-between gap-2 rounded-md border border-neutral-300 p-2 px-3 text-neutral-400 duration-300 hover:scale-105 hover:bg-neutral-300 dark:border-neutral-700 dark:hover:bg-neutral-700
       ${className} ${BUTTON_TYPES[type]}`}
       onClick={onClick}
     >

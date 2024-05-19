@@ -5,12 +5,24 @@
       "loginLong": "Sign in to get started",
       "logout": "Sign Out",
       "dashboardLinks": "My links",
-      "short": "Chop"
+      "short": "Chop",
+      "createLink": "Create link"
+    },
+    "dashboard": {
+      "myLinks": "My links"
     },
     "home": {
       "title": "Store and manage all your links",
       "description": "Chopchop url is an open source project which allows to improve the user's link management. Log in to customize, manage and permanently store your links.",
       "timeLimit": "Links created without a personal account will be available for 24 hours."
+    },
+    "link": {
+      "copyPassword": "Click to copy password",
+      "noPassword": "Link without password",
+      "visited": "visited"
+    },
+    "notification": {
+      "copiedToCB": "Copied to clipboard"
     }
   }
 }

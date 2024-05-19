@@ -13,7 +13,7 @@ const useLinkStore = create<LinkStore>()((set) => ({
     set((state) => ({ links: [...state.links, link] }));
   },
   remove: (id) => {
-    set((state) => ({ links: state.links.filter((link) => link.id != id) }));
+    set((state) => ({ links: state.links.filter((link) => link._id != id) }));
   },
 }));
 

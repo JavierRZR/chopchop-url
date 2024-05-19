@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "tippy.js/dist/tippy.css";
 
 import { LoginContextProvider } from "../contexts/LoginProvider";
 import { ThemeProvider } from "../contexts/ThemeProvider";
@@ -20,7 +21,7 @@ const Layout = () => {
             selection:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-100 dark:selection:bg-neutral-600"
           >
             <Navbar />
-            <main className="flex h-full min-h-full max-w-6xl  flex-col items-start justify-start gap-24 px-5">
+            <main className="flex h-full min-h-full w-full max-w-6xl  flex-col items-start justify-start gap-24 px-5">
               <Outlet />
             </main>
             <Footer />

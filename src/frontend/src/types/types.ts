@@ -6,12 +6,12 @@ export interface GithubUser {
 }
 
 export interface LinkType {
-  id: string;
-  origen: string;
-  destino: string;
-  idUser: string;
-  status?: boolean;
+  _id: string;
+  userId: string;
+  fromUrl: string;
+  toUrl: string;
+  numClicks?: number;
+  maxNumClicks?: number;
+  password?: string;
   description?: string;
-  nClicks?: number;
-  creationDate: Date;
 }

@@ -299,6 +299,141 @@ const LinkIcon = ({
   );
 };
 
+const LockIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-lock ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+      <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+      <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+    </svg>
+  );
+};
+
+const LockOffIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-lock-off ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M15 11h2a2 2 0 0 1 2 2v2m0 4a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h4" />
+      <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+      <path d="M8 11v-3m.719 -3.289a4 4 0 0 1 7.281 2.289v4" />
+      <path d="M3 3l18 18" />
+    </svg>
+  );
+};
+
+const CopyIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-clipboard-copy ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+      <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+    </svg>
+  );
+};
+
+const SettingsIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-clipboard-copy ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" />
+      <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    </svg>
+  );
+};
+
+const DeleteIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-clipboard-copy ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 7l16 0" />
+      <path d="M10 11l0 6" />
+      <path d="M14 11l0 6" />
+      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+    </svg>
+  );
+};
 export {
   LightThemeIcon,
   DarkThemeIcon,
@@ -311,4 +446,9 @@ export {
   ArrowRightIcon,
   ProfileIcon,
   LinkIcon,
+  LockIcon,
+  LockOffIcon,
+  CopyIcon,
+  SettingsIcon,
+  DeleteIcon,
 };
