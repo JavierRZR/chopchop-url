@@ -23,3 +23,12 @@ export interface InputLinkType {
   maxNumClicks?: number;
   password?: string;
 }
+
+
+export interface InputComplexLinkData {
+  fromUrl: string;
+  toUrl: string;
+  description?: string;
+  password?: string;
+  numMaxClicks?: number;
+}

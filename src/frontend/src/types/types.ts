@@ -7,7 +7,7 @@ export interface GithubUser {
 
 export interface LinkType {
   _id: string;
-  userId: string;
+  userId?: string;
   fromUrl: string;
   toUrl: string;
   numClicks?: number;

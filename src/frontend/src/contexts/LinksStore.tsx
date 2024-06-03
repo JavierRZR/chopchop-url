@@ -5,6 +5,7 @@ type LinkStore = {
   links: LinkType[];
   add: (link: LinkType) => void;
   remove: (id: string) => void;
+  setInitialLinks: (links: LinkType[]) => void;
 };
 
 const useLinkStore = create<LinkStore>()((set) => ({
@@ -14,6 +15,9 @@ const useLinkStore = create<LinkStore>()((set) => ({
   },
   remove: (id) => {
     set((state) => ({ links: state.links.filter((link) => link._id != id) }));
+  },
+  setInitialLinks: (links) => {
+    set(() => ({ links: links }));
   },
 }));
 

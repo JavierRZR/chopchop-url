@@ -1,9 +1,15 @@
+import { useThemeContext } from "../contexts/ThemeProvider";
+const darkColor = "#000";
+const ligthColor = "#eee";
+
 const LightThemeIcon = ({
   color = "#ffffff",
   strokeWidth = "1.5",
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +36,8 @@ const DarkThemeIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +65,8 @@ const LanguageIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +96,8 @@ const LinkedinIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +127,8 @@ const GithubIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -140,6 +154,8 @@ const GlobeWorlIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -169,6 +185,8 @@ const MailIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -195,6 +213,8 @@ const ExternalLinkIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +242,8 @@ const ArrowRightIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -247,6 +269,8 @@ const ProfileIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -274,6 +298,8 @@ const LinkIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -305,6 +331,8 @@ const LockIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -332,6 +360,8 @@ const LockOffIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -360,6 +390,8 @@ const CopyIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -386,6 +418,8 @@ const SettingsIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -412,6 +446,8 @@ const DeleteIcon = ({
   size = 32,
   className = "",
 }) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -434,6 +470,63 @@ const DeleteIcon = ({
     </svg>
   );
 };
+const CloseIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-clipboard-copy ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+      <path d="M10 10l4 4m0 -4l-4 4" />
+    </svg>
+  );
+};
+const RandomIcon = ({
+  color = "#ffffff",
+  strokeWidth = "1.5",
+  size = 32,
+  className = "",
+}) => {
+  const { theme } = useThemeContext();
+  color = theme == "dark" ? ligthColor : darkColor;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`icon icon-tabler icon-tabler-clipboard-copy ${className}`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 4l3 3l-3 3" />
+      <path d="M18 20l3 -3l-3 -3" />
+      <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5" />
+      <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3" />
+    </svg>
+  );
+};
+
 export {
   LightThemeIcon,
   DarkThemeIcon,
@@ -451,4 +544,6 @@ export {
   CopyIcon,
   SettingsIcon,
   DeleteIcon,
+  CloseIcon,
+  RandomIcon,
 };

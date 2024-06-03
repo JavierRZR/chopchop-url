@@ -19,7 +19,6 @@ const Footer = () => {
           <GithubIcon
             className="duration-150 hover:scale-105"
             strokeWidth={theme == "light" ? "1.5" : "1"}
-            color={theme == "light" ? "#999" : "#555"}
           />
         </IconButton>
       </a>

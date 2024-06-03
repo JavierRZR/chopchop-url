@@ -4,9 +4,10 @@
       "login": "Comenzar",
       "loginLong": "Inicia sesión para comenzar",
       "logout": "Cerrar sesión",
-      "dashboardLinks": "Mis links",
+      "dashboardLinks": "Mis enlaces",
       "short": "Chop",
-      "createLink": "Crear link"
+      "createLink": "Crear enlace",
+      "modifyLink": "Modificar enlace"
     },
     "home": {
       "title": "Almacena y gestiona tus enlaces",
@@ -18,11 +19,42 @@
     },
     "link": {
       "copyPassword": "Clica para copiar contraseña",
-      "noPassword": "Link sin contraseña",
-      "visited": "visitas"
+      "noPassword": "Enlace sin contraseña",
+      "visited": "visitas",
+      "copy": "Copiar",
+      "modify": "Modificar",
+      "delete": "Eliminar"
     },
     "notification": {
-      "copiedToCB": "Copiado en el portapeles"
+      "copiedToCB": "Copiado en el portapeles",
+      "successLinkCreate": "Enlace chopeado correctamente!",
+      "error": "Ha ocurrido un error."
+    },
+    "forms": {
+      "createLink": {
+        "header": "Crear enlace",
+        "modifyHeader": "Modificar enlace",
+        "toUrl": "URL Destino",
+        "fromUrl": "URL Acortada",
+        "random": "Aleatorio",
+        "description": "Descripción",
+        "password": "Contraseña",
+        "maxNumClicks": "Máximo de clicks",
+        "errorFromUrl": "La url destino es obligatoria. No ha introducido una url. Ej: https://prueba.com",
+        "errorToUrl": "Introduzca el domino que desee o hágalo aleatorio. Mínimo de 6 caracteres.",
+        "errorDescription": "/300 Ha superado el número máximo de caracteres.",
+        "errorPassword": "Introduzca al menos 4 caracteres.",
+        "errorMaxNumClicks": "Hay un error.",
+        "optional": "opcional"
+      }
+    },
+    "errors": {
+      "VL-0001": "Error con la url destino, no cumple el formato o no se ha introducido.",
+      "VL-0002": "Error en el dominio introducido, ha de tener más de 6 caracteres.",
+      "VL-0003": "Error en la descripción, el máximo de longitud son 300 caracteres.",
+      "VL-0004": "Error en la contraseña, el mínimo han de ser 4 caracteres.",
+      "VL-0005": "Error en el máximo de clicks, ha de ser mayor de 0.",
+      "CE-0001": "Error, la url a choppear ya existe en tus registros."
     }
   }
 }
