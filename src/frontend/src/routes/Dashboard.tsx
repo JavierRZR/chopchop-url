@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { useThemeContext } from "../contexts/ThemeProvider";
 import { useLoginContext } from "../contexts/LoginProvider";
 import useLinkStore from "../contexts/LinksStore";
 import { LinkIcon } from "../assets/svg";
@@ -12,16 +11,14 @@ import Modal from "../ui/Modal";
 import FormCreateLink from "../components/FormCreateLink";
 
 const Dashboard = () => {
-  const { theme } = useThemeContext();
   const { t } = useTranslation();
   const { user } = useLoginContext();
-  const { links, add, setInitialLinks } = useLinkStore();
-  const { show, toggleShow } = useModalContext();
+  const { links, setInitialLinks } = useLinkStore();
+  const { toggleShow } = useModalContext();
 
-  //todo To uncomment, just testing and building actions.
-  // if (!user) {
-  //   window.location.href = "http://localhost:5173";
-  // }
+  if (!user) {
+    window.location.href = "http://localhost:5173";
+  }
 
   useEffect(() => {
     axios

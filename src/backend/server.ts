@@ -1,6 +1,6 @@
 require("dotenv").config();
 import express, { Request, Response } from "express";
-import { GithubUser } from "./types/types";
+import { GithubUser, LinkType } from "./types/types";
 import session from "express-session";
 const cookieParser = require("cookie-parser");
 import passport from "passport";
@@ -241,7 +241,6 @@ app.post("/createCompleteLink", (req, res) => {
   }
   validation.result && searchLink();
 });
-
 app.get("/getAllLinks", (req, res) => {
   const links: any = [];
 
@@ -252,6 +251,23 @@ app.get("/getAllLinks", (req, res) => {
     })
     .then(() => {
       res.status(200).json({ links: links });
+    })
+    .catch((err: any) => {
+      res.status(500).json(err);
+    });
+});
+
+app.get("/:fromUrl", (req, res) => {
+  const fromUrl = req.params.fromUrl;
+
+  db.collection("links")
+    .findOne({ fromUrl: fromUrl })
+    .then((link: LinkType) => {
+      if (link) {
+        res.status(200).json(link);
+      } else {
+        res.status(404).json({code: "SH-0001"});
+      }
     })
     .catch((err: any) => {
       res.status(500).json(err);
@@ -276,8 +292,6 @@ app.get("/getUserLinks/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
-
 app.put("/links/:id", (req, res) => {
   const linkId = req.params.id;
   const updateLink = req.body;
@@ -317,6 +331,26 @@ app.delete("/links/:id", (req, res) => {
   }
 });
 
+app.post("/authorizeUrl", (req, res) => {
+  const password = req.body.password;
+  const fromUrl = req.body.fromUrl;
+
+  db.collection("links")
+    .findOne({ fromUrl: fromUrl, password:password })
+    .then((link: LinkType) => {
+      if (link) {
+        res.status(200).json(link);
+      } else {
+        res.status(404).json({code: "SH-0002"});
+      }
+    })
+    .catch((err: any) => {
+      res.status(500).json(err);
+    });
+
+})
+
+//todo sumar visitar a las webs.
 
 
 

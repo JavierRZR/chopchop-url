@@ -7,7 +7,8 @@
       "dashboardLinks": "Mis enlaces",
       "short": "Chop",
       "createLink": "Crear enlace",
-      "modifyLink": "Modificar enlace"
+      "modifyLink": "Modificar enlace",
+      "send": "Enviar"
     },
     "home": {
       "title": "Almacena y gestiona tus enlaces",
@@ -46,6 +47,10 @@
         "errorPassword": "Introduzca al menos 4 caracteres.",
         "errorMaxNumClicks": "Hay un error.",
         "optional": "opcional"
+      },
+      "passwordNavigate": {
+        "header": "Enlace protegido.",
+        "subheader": "Introduzca la contraseña."
       }
     },
     "errors": {
@@ -54,7 +59,9 @@
       "VL-0003": "Error en la descripción, el máximo de longitud son 300 caracteres.",
       "VL-0004": "Error en la contraseña, el mínimo han de ser 4 caracteres.",
       "VL-0005": "Error en el máximo de clicks, ha de ser mayor de 0.",
-      "CE-0001": "Error, la url a choppear ya existe en tus registros."
+      "CE-0001": "Error, la url a choppear ya existe en tus registros.",
+      "SH-0001": "Error, la url que buscas no existe.",
+      "SH-0002": "Error, contraseña incorrecta."
     }
   }
 }

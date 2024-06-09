@@ -11,6 +11,7 @@ import { useLoginContext } from "../contexts/LoginProvider";
 import uuid from "react-uuid";
 import { LinkType } from "../types/types";
 import useModalContext from "../contexts/ModalContext";
+import useLinkStore from "../contexts/LinksStore";
 
 const FORM_TYPE = {
   CREATE: "create",
@@ -24,10 +25,11 @@ const FormCreateLink: React.FC<{
   const { t } = useTranslation();
   const { theme } = useThemeContext();
   const { user } = useLoginContext();
+  const { add, modify } = useLinkStore();
   const { toggleShow } = useModalContext();
 
   const [toUrlValue, setToUrlValue] = useState(initData?.toUrl || "");
-  const [fromUrlValue, setFromUrlValue] = useState(initData?.fromUrl || "");
+  const [fromUrlValue, setFromUrlValue] = useState(initData?.fromUrl || uuid());
   const [descriptionValue, setDescriptionValue] = useState(
     initData?.description || "",
   );
@@ -52,6 +54,7 @@ const FormCreateLink: React.FC<{
         userId: user?.id,
       });
       afterLinkAction();
+      add(data);
       toast.info(<span>{t("notification.successLinkCreate")}</span>, {
         autoClose: 1000,
         theme: theme,
@@ -77,6 +80,7 @@ const FormCreateLink: React.FC<{
         userId: user?.id,
       });
       afterLinkAction();
+      modify(initData?._id || "", data);
       toast.info(<span>{t("notification.successLinkCreate")}</span>, {
         autoClose: 1000,
         theme: theme,
@@ -135,7 +139,8 @@ const FormCreateLink: React.FC<{
             {...register("fromUrl", {
               required: true,
               maxLength: 50,
-              pattern: /^\W*(?:[a-zA-Z0-9-]{6,}\W*)$/,
+              // pattern: /^\W*(?:[a-zA-Z0-9-]{6,}\W*)$/,
+              validate: (value) => /^\W*(?:[a-zA-Z0-9-]{6,}\W*)$/.test(value),
               onChange(event) {
                 setFromUrlValue(event.target.value);
               },

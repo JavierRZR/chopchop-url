@@ -31,7 +31,7 @@ const UrlInputField = () => {
     };
 
     try {
-      const response: any = await axios.post(
+      const response = await axios.post(
         "http://localhost:5000/createBasicLink",
         newLink,
       );

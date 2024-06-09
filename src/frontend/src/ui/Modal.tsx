@@ -9,8 +9,16 @@ const Modal: React.FC<{
   id: string;
   header?: string;
   subHeader?: string;
+  closable?: boolean;
   closeOutside?: boolean;
-}> = ({ children, id, header, subHeader, closeOutside = true }) => {
+}> = ({
+  children,
+  id,
+  header,
+  subHeader,
+  closable = true,
+  closeOutside = true,
+}) => {
   const { theme } = useThemeContext();
   const { show, modalId, toggleShow } = useModalContext();
 
@@ -26,7 +34,7 @@ const Modal: React.FC<{
   return (
     <>
       <section
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-2 transition-opacity duration-300 ${
           show ? "opacity-100" : "opacity-0"
         }`}
         onClick={(event) => {
@@ -42,15 +50,17 @@ const Modal: React.FC<{
               <h1 className="mb-2 text-2xl font-semibold opacity-90">
                 {header}
               </h1>
-              <h2 className="text-sm opacity-80">{subHeader}</h2>
+              <h2 className="text-start text-sm opacity-80">{subHeader}</h2>
             </div>
-            <IconButton
-              onClick={() => {
-                toggleShow("");
-              }}
-            >
-              {<CloseIcon color={`${theme == "dark" ? "#999" : "#333"}`} />}
-            </IconButton>
+            {closable && (
+              <IconButton
+                onClick={() => {
+                  toggleShow("");
+                }}
+              >
+                {<CloseIcon color={`${theme == "dark" ? "#999" : "#333"}`} />}
+              </IconButton>
+            )}
           </header>
           <section>{children}</section>
         </div>
