@@ -1,7 +1,7 @@
 import { InputComplexLinkData } from "./types/types";
 
 const URL_REGEX: RegExp =
-  /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)?$/;
+/^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)*\/?$/;
 
 const FROM_URL_REGEX: RegExp = /^\W*(?:[a-zA-Z0-9-]{6,}\W*)$/;
 export function validateEasyLink(link: { toUrl: string; userId?: string }) {

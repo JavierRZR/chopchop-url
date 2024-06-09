@@ -257,23 +257,6 @@ app.get("/getAllLinks", (req, res) => {
     });
 });
 
-app.get("/:fromUrl", (req, res) => {
-  const fromUrl = req.params.fromUrl;
-
-  db.collection("links")
-    .findOne({ fromUrl: fromUrl })
-    .then((link: LinkType) => {
-      if (link) {
-        res.status(200).json(link);
-      } else {
-        res.status(404).json({code: "SH-0001"});
-      }
-    })
-    .catch((err: any) => {
-      res.status(500).json(err);
-    });
-});
-
 app.get("/getUserLinks/:id", (req, res) => {
   const userId = req.params.id;
   if (!userId)
@@ -331,17 +314,57 @@ app.delete("/links/:id", (req, res) => {
   }
 });
 
+const updateVisit = (linkId: string) => {
+  if (ObjectId.isValid(linkId)) {
+    const updateId = new ObjectId(linkId);
+
+    db.collection("links")
+      .updateOne({ _id: updateId },
+        { $inc: { "numClicks": 1 } })
+      .then((response: any) => {
+      })
+  }
+}
+
+app.get("/:fromUrl", (req, res) => {
+  const fromUrl = req.params.fromUrl;
+
+  db.collection("links")
+    .findOne({ fromUrl: fromUrl })
+    .then((link: LinkType) => {
+      if (link) {
+        console.log(link);
+        console.log(link.maxNumClicks && (link.numClicks || link.numClicks == 0) && link.numClicks < Number(link.maxNumClicks));
+
+        if (link.maxNumClicks && (link.numClicks || link.numClicks == 0) && link.numClicks < Number(link.maxNumClicks)) {
+          updateVisit(link._id)
+          res.status(200).json(link);
+        }else if(!link.maxNumClicks) {
+          updateVisit(link._id)
+          res.status(200).json(link);
+        } else {
+          res.status(403).json({ code: "SH-0003" })
+        }
+      } else {
+        res.status(404).json({ code: "SH-0001" });
+      }
+    })
+    .catch((err: any) => {
+      res.status(500).json(err);
+    });
+});
+
 app.post("/authorizeUrl", (req, res) => {
   const password = req.body.password;
   const fromUrl = req.body.fromUrl;
 
   db.collection("links")
-    .findOne({ fromUrl: fromUrl, password:password })
+    .findOne({ fromUrl: fromUrl, password: password })
     .then((link: LinkType) => {
       if (link) {
         res.status(200).json(link);
       } else {
-        res.status(404).json({code: "SH-0002"});
+        res.status(404).json({ code: "SH-0002" });
       }
     })
     .catch((err: any) => {

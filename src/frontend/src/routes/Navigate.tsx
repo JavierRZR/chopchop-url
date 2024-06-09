@@ -20,12 +20,14 @@ const Navigate = () => {
       try {
         const response = await axios.get(`http://localhost:5000/${fromUrl}`);
 
-        setPassword(response.data.password || "");
-        setToUrl(response.data.toUrl);
-        toggleShow("navigatePassword");
+        console.log(response.data);
 
-        //! descomentar para versión final
-        // if (!response.data.password) window.location.href = response.data.toUrl;
+        if (response.data.password) {
+          setPassword(response.data.password || "");
+          setToUrl(response.data.toUrl);
+          toggleShow("navigatePassword");
+        }
+        if (!response.data.password) window.location.href = response.data.toUrl;
       } catch (error: any) {
         const code = error.response.data.code;
         setError(code + ": " + t(`errors.${code}`));

@@ -10,13 +10,13 @@
       "modifyLink": "Modify link",
       "send": "Submit"
     },
-    "dashboard": {
-      "myLinks": "My links"
-    },
     "home": {
       "title": "Store and manage all your links",
       "description": "Chopchop url is an open source project which allows to improve the user's link management. Log in to customize, manage and permanently store your links.",
       "timeLimit": "Links created without a personal account will be available for 24 hours."
+    },
+    "dashboard": {
+      "myLinks": "My links"
     },
     "link": {
       "copyPassword": "Click to copy password",
@@ -40,20 +40,27 @@
         "description": "Description",
         "password": "Password",
         "maxNumClicks": "Max clicks",
-        "optional": "optional",
         "errorToUrl": "The destination URL is required. You have not entered a URL. E.g.: https://example.com",
         "errorFromUrl": "Please enter the desired domain or make it random. Minimun of 6 characters.",
         "errorDescription": "/300 You have exceeded the maximum number of characters.",
         "errorPassword": "Introduce 4 characters at least.",
-        "errorMaxNumClicks": "There is an error."
-      }
+        "errorMaxNumClicks": "There is an error.",
+        "optional": "optional"
+      },
+      "passwordNavigate": {
+        "header": "Protected link.",
+        "subheader": "Enter password."}
     },
     "errors": {
       "VL-0001": "Error with the destination URL, it does not meet the format or has not been entered.",
       "VL-0002": "Error with the entered domain, it must be more than 6 characters.",
       "VL-0003": "Error with the description, the maximum length is 300 characters.",
       "VL-0004": "Error with the password, the minimum must be 4 characters.",
-      "VL-0005": "Error with the maximum number of clicks, it must be greater than 0."
+      "VL-0005": "Error with the maximum number of clicks, it must be greater than 0.",
+      "CE-0001": "Error, url already exists on your profile.",
+      "SH-0001": "Error, url you are looking for doesn't exists.",
+      "SH-0002": "Error, incorrect password.",
+      "SH-0003": "Error, the link access limit has been reached."
     }
   }
 }

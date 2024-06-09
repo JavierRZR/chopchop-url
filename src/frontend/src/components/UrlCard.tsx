@@ -54,7 +54,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
         <header className="flex flex-row justify-between">
           <div className="flex w-full  flex-col gap-2 overflow-hidden truncate text-ellipsis text-start">
             <Link
-              // to={toUrl}
+              target="_blank"
               to={`http://localhost:5173/${fromUrl}`}
               className="flex w-auto flex-row items-center gap-2"
             >

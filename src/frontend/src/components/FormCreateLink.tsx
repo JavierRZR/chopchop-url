@@ -117,7 +117,7 @@ const FormCreateLink: React.FC<{
           {...register("toUrl", {
             required: true,
             pattern:
-              /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)?$/,
+              /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)*\/?$/,
             onChange: (e) => setToUrlValue(e.target.value),
           })}
           className="w-full rounded-md border-2 border-neutral-400 bg-neutral-100 text-sm focus:border-neutral-400  dark:border-neutral-700 dark:bg-neutral-900"

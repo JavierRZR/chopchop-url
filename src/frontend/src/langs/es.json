@@ -61,7 +61,8 @@
       "VL-0005": "Error en el máximo de clicks, ha de ser mayor de 0.",
       "CE-0001": "Error, la url a choppear ya existe en tus registros.",
       "SH-0001": "Error, la url que buscas no existe.",
-      "SH-0002": "Error, contraseña incorrecta."
+      "SH-0002": "Error, contraseña incorrecta.",
+      "SH-0003": "Error, se ha alcanzado el límite de accesos al enlace."
     }
   }
 }
