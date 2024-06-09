@@ -333,9 +333,6 @@ app.get("/:fromUrl", (req, res) => {
     .findOne({ fromUrl: fromUrl })
     .then((link: LinkType) => {
       if (link) {
-        console.log(link);
-        console.log(link.maxNumClicks && (link.numClicks || link.numClicks == 0) && link.numClicks < Number(link.maxNumClicks));
-
         if (link.maxNumClicks && (link.numClicks || link.numClicks == 0) && link.numClicks < Number(link.maxNumClicks)) {
           updateVisit(link._id)
           res.status(200).json(link);
