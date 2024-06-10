@@ -35,6 +35,9 @@
     "passport": "^0.7.0",
     "passport-github": "^1.1.0",
     "passport-google-oauth20": "^2.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "@types/js-cookie": "^3.0.6",
+    "autoprefixer": "^10.4.19",
+    "js-cookie": "^3.0.5"
   }
 }
