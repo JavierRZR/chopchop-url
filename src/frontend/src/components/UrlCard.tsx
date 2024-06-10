@@ -154,7 +154,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
                   className="font-mono text-sm hover:scale-100"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `${import.meta.env.VITE_BACK_URL}/fromUrl`,
+                      `${import.meta.env.VITE_BACK_URL}/${fromUrl}`,
                     );
                   }}
                 >

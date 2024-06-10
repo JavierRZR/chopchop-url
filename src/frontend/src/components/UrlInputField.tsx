@@ -12,7 +12,7 @@ import { useLoginContext } from "../contexts/LoginProvider";
 import UrlCard from "./UrlCard";
 
 const URL_REGEX: RegExp =
-  /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)?$/;
+  /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)*\/?$/;
 
 const UrlInputField = () => {
   const { t } = useTranslation();
