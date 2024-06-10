@@ -3,7 +3,7 @@ import { MongoClient, Db } from "mongodb";
 let dbConnection: Db | null = null;
 
 export const connectToDb = (cb: (err?: Error) => void): void => {
-  MongoClient.connect("mongodb://localhost:27017/chopchop-url")
+  MongoClient.connect(process.env.MONGO_URL!)
     .then((client) => {
       dbConnection = client.db();
       cb();
