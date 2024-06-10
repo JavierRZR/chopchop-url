@@ -139,12 +139,11 @@ connectToDb((err) => {
 app.post("/createBasicLink", (req, res) => {
   var validation = validateEasyLink(req.body);
   if (!validation.result) {
-    res
-      .status(400)
-      .json({
-        code: validation.code,
-        message: "A correct url has not been sent. Please try again after checking your URL.",
-      });
+    res.status(400).json({
+      code: validation.code,
+      message:
+        "A correct url has not been sent. Please try again after checking your URL.",
+    });
   }
   const link = req.body;
 
@@ -157,7 +156,8 @@ app.post("/createBasicLink", (req, res) => {
         .then((response: any) => {
           if (response) {
             res.status(409).json({
-              code: "CE-0001", message: "You already has this url chopped."
+              code: "CE-0001",
+              message: "You already has this url chopped.",
             });
           } else {
             createLink();
@@ -193,12 +193,11 @@ app.post("/createBasicLink", (req, res) => {
 app.post("/createCompleteLink", (req, res) => {
   var validation = validateComplexLink(req.body);
   if (!validation.result) {
-    res
-      .status(400)
-      .json({
-        code: validation.code,
-        message: "A correct url has not been sent. Please try again after checking your URL.",
-      });
+    res.status(400).json({
+      code: validation.code,
+      message:
+        "A correct url has not been sent. Please try again after checking your URL.",
+    });
   }
   const link = req.body;
 
@@ -211,7 +210,8 @@ app.post("/createCompleteLink", (req, res) => {
         .then((response: any) => {
           if (response) {
             res.status(409).json({
-              code: "CE-0001", message: "You already has this url chopped."
+              code: "CE-0001",
+              message: "You already has this url chopped.",
             });
           } else {
             createLink();
@@ -283,8 +283,7 @@ app.put("/links/:id", (req, res) => {
     const updateId = new ObjectId(linkId);
 
     db.collection("links")
-      .updateOne({ _id: updateId },
-        { $set: updateLink })
+      .updateOne({ _id: updateId }, { $set: updateLink })
       .then((response: any) => {
         res.status(200).json(response);
       })
@@ -319,12 +318,10 @@ const updateVisit = (linkId: string) => {
     const updateId = new ObjectId(linkId);
 
     db.collection("links")
-      .updateOne({ _id: updateId },
-        { $inc: { "numClicks": 1 } })
-      .then((response: any) => {
-      })
+      .updateOne({ _id: updateId }, { $inc: { numClicks: 1 } })
+      .then((response: any) => {});
   }
-}
+};
 
 app.get("/:fromUrl", (req, res) => {
   const fromUrl = req.params.fromUrl;
@@ -333,14 +330,18 @@ app.get("/:fromUrl", (req, res) => {
     .findOne({ fromUrl: fromUrl })
     .then((link: LinkType) => {
       if (link) {
-        if (link.maxNumClicks && (link.numClicks || link.numClicks == 0) && link.numClicks < Number(link.maxNumClicks)) {
-          updateVisit(link._id)
+        if (
+          link.maxNumClicks &&
+          (link.numClicks || link.numClicks == 0) &&
+          link.numClicks < Number(link.maxNumClicks)
+        ) {
+          updateVisit(link._id);
           res.status(200).json(link);
-        }else if(!link.maxNumClicks) {
-          updateVisit(link._id)
+        } else if (!link.maxNumClicks) {
+          updateVisit(link._id);
           res.status(200).json(link);
         } else {
-          res.status(403).json({ code: "SH-0003" })
+          res.status(403).json({ code: "SH-0003" });
         }
       } else {
         res.status(404).json({ code: "SH-0001" });
@@ -367,16 +368,10 @@ app.post("/authorizeUrl", (req, res) => {
     .catch((err: any) => {
       res.status(500).json(err);
     });
-
-})
-
-//todo sumar visitar a las webs.
-
-
-
+});
 
 // Start the server
-const port = process.env.PORT! || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
