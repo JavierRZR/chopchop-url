@@ -17,12 +17,12 @@ const Dashboard = () => {
   const { toggleShow } = useModalContext();
 
   if (!user) {
-    window.location.href = "http://localhost:5173";
+    window.location.href = `${import.meta.env.VITE_FRONT_URL}`;
   }
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/getUserLinks/${user?.id}`)
+      .get(`${import.meta.env.VITE_BACK_URL}/getUserLinks/${user?.id}`)
       .then((response) => {
         setInitialLinks(response.data.links);
       });

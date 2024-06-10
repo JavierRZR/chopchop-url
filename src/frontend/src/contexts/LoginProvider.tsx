@@ -47,7 +47,7 @@ export const LoginContextProvider: React.FC<LoginProviderProps> = ({
   const logoutUser = async () => {
     try {
       // Make a request to the logout endpoint
-      await axios.get("http://localhost:5000/logout", {
+      await axios.get(`${import.meta.env.VITE_BACK_URL}/logout`, {
         withCredentials: true,
       });
 

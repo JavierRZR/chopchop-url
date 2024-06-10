@@ -49,7 +49,7 @@ const FormCreateLink: React.FC<{
 
   const createLink = async (data: any) => {
     try {
-      await axios.post("http://localhost:5000/createCompleteLink", {
+      await axios.post(`${import.meta.env.VITE_BACK_URL}/createCompleteLink`, {
         ...data,
         userId: user?.id,
       });
@@ -75,10 +75,13 @@ const FormCreateLink: React.FC<{
 
   const modifyLink = async (data: any) => {
     try {
-      await axios.put(`http://localhost:5000/links/${initData?._id}`, {
-        ...data,
-        userId: user?.id,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_BACK_URL}/links/${initData?._id}`,
+        {
+          ...data,
+          userId: user?.id,
+        },
+      );
       afterLinkAction();
       modify(initData?._id || "", data);
       toast.info(<span>{t("notification.successLinkCreate")}</span>, {

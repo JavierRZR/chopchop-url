@@ -45,7 +45,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
 
   const deleteLink = async () => {
     //Añadir el userId para seguridad
-    await axios.delete(`http://localhost:5000/links/${_id}`);
+    await axios.delete(`${import.meta.env.VITE_BACK_URL}/links/${_id}`);
   };
 
   return (
@@ -55,7 +55,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
           <div className="flex w-full  flex-col gap-2 overflow-hidden truncate text-ellipsis text-start">
             <Link
               target="_blank"
-              to={`http://localhost:5173/${fromUrl}`}
+              to={`${import.meta.env.VITE_FRONT_URL}/${fromUrl}`}
               className="flex w-auto flex-row items-center gap-2"
             >
               <h1 className="text-md inline max-w-[80%] truncate font-bold lg:text-xl dark:opacity-80">
@@ -154,7 +154,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
                   className="font-mono text-sm hover:scale-100"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      "http://localhost/5000/" + fromUrl,
+                      `${import.meta.env.VITE_BACK_URL}/fromUrl`,
                     );
                   }}
                 >

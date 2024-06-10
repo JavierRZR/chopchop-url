@@ -31,7 +31,7 @@ const Profile = () => {
               {user.name}
             </Dropdown.Item>
             <Dropdown.Item>
-              <Link to={"http://localhost:5173/links"}>
+              <Link to={`${import.meta.env.VITE_FRONT_URL}links`}>
                 {t("btn.dashboardLinks")}
               </Link>
             </Dropdown.Item>

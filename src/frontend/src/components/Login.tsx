@@ -12,7 +12,7 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const text = t(`btn.${type}`);
 
   const loginWithGitHub = () => {
-    window.location.href = "http://localhost:5000/auth/github";
+    window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/github`;
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const checkAuthentication = async () => {
     try {
       // Check if the user is authenticated by sending a request to the backend
-      const response = await axios.get("http://localhost:5000/user", {
+      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/user`, {
         withCredentials: true,
       });
       const loggedUser = response.data;

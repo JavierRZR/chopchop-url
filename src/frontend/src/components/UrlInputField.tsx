@@ -32,7 +32,7 @@ const UrlInputField = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/createBasicLink",
+        `${import.meta.env.VITE_BACK_URL}/createBasicLink`,
         newLink,
       );
       setLastChopped(response.data.newLink);

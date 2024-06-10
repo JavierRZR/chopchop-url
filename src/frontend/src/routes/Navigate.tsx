@@ -18,7 +18,9 @@ const Navigate = () => {
   useEffect(() => {
     const fetchUrlData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/${fromUrl}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACK_URL}/${fromUrl}`,
+        );
 
         console.log(response.data);
 
