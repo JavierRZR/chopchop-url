@@ -28,7 +28,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ data, simpleView = false }) => {
   0;
   const {
     _id,
-    userId,
+    // userId,
     fromUrl,
     toUrl,
     numClicks,

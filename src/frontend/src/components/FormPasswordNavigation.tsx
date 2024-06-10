@@ -21,7 +21,7 @@ const FormPasswordNavigation: React.FC<{
     console.log(data);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACK_URL}/authorizeUrl`, {
+      await axios.post(`${import.meta.env.VITE_BACK_URL}/authorizeUrl`, {
         fromUrl: fromUrl,
         password: data.password,
       });
