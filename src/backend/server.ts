@@ -1,7 +1,8 @@
 require("dotenv").config();
 import express, { Request, Response } from "express";
 import { GithubUser, LinkType } from "./types/types";
-import session from "express-session";
+// import session from "express-session";
+import session from "cookie-session";
 const cookieParser = require("cookie-parser");
 import passport from "passport";
 import cors from "cors";
@@ -25,8 +26,6 @@ app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY!,
-    resave: false,
-    saveUninitialized: true,
   }),
 );
 
