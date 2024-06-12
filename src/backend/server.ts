@@ -83,7 +83,7 @@ app.get(
   passport.authenticate("github", { failureRedirect: "/login" }),
   generateTokenMiddleware,
   (req, res) => {
-    const user: any = req.user;
+    console.log("hemos llegado ya?");
     res.redirect(process.env.FRONT_URL!);
   },
 );
@@ -242,6 +242,7 @@ app.post("/createCompleteLink", (req, res) => {
 });
 app.get("/getAllLinks", (req, res) => {
   const links: any = [];
+  console.log("Pillando links?");
 
   db.collection("links")
     .find()
