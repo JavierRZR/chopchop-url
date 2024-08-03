@@ -374,6 +374,7 @@ app.post("/authorizeUrl", (req, res) => {
 
 // Start the server
 const port = process.env.PORT;
+console.log("Prueba de llegada")
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
