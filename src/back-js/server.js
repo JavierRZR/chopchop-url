@@ -1,18 +1,18 @@
-require("dotenv").config();
-import express, { Request, Response } from "express";
-import { GithubUser, LinkType } from "./types/types";
+import dotenv from 'dotenv';
+import express from "express";
 import session from "express-session";
 // import session from "cookie-session";
-const cookieParser = require("cookie-parser");
+import cookieParser from "cookie-parser";
 import passport from "passport";
 import cors from "cors";
 import { Strategy as GithubStrategy } from "passport-github";
 import jwt from "jsonwebtoken";
 import { Db, ObjectId } from "mongodb";
-import { connectToDb, getDb } from "./db";
-import { validateEasyLink, validateComplexLink } from "./validation";
+import { connectToDb, getDb } from "./db.js";
+import { validateEasyLink, validateComplexLink } from "./validation.js";
 import { v4 as uuidv4 } from "uuid";
 
+dotenv.config();
 const app = express(); // Create an instance of Express
 app.use(express.json());
 const corsOptions = {
@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET_KEY!,
+    secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true },
@@ -36,17 +36,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport serialization and deserialization
-passport.serializeUser((user: any, done: Function) => {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser((user: any, done: Function) => {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 passport.use(
   new GithubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "/auth/github/callback",
     },
     (accessToken, refreshToken, profile, done) => {
@@ -58,15 +58,15 @@ passport.use(
 );
 
 // Custom middleware to generate JWT token and store it in a session cookie
-const generateTokenMiddleware = (req: any, res: any, next: Function) => {
+const generateTokenMiddleware = (req, res, next) => {
   const reqUser = req.user;
-  const returned: GithubUser = {
+  const returned = {
     id: reqUser?.id,
     username: reqUser?.username,
     name: reqUser?.displayName,
     avatarUrl: reqUser?.photos[0]?.value || null,
   };
-  const token = jwt.sign(reqUser, process.env.JWT_SECRET_KEY!, {
+  const token = jwt.sign(reqUser, process.env.JWT_SECRET_KEY, {
     expiresIn: "5h",
   });
   req.session.token = token; // Store token in session
@@ -86,29 +86,29 @@ app.get(
   generateTokenMiddleware,
   (req, res) => {
     console.log("hemos llegado ya?");
-    res.redirect(process.env.FRONT_URL!);
+    res.redirect(process.env.FRONT_URL);
   },
 );
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL!); // Allow requests from any origin
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
 
-  const token: string = String(req.cookies.token);
+  const token = String(req.cookies.token);
 
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY!, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).json({ error: "Invalid token" });
     }
 
     // Token is valid, extract user information from decoded token
-    const userData = <any>decoded;
+    const userData = decoded;
 
-    const returned: GithubUser = {
+    const returned = {
       id: userData?.id,
       username: userData?.username,
       name: userData?.displayName,
@@ -120,7 +120,7 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL!); // Allow requests from any origin
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
 
   // Clear the cookie by setting its expiration date to the past
@@ -132,7 +132,7 @@ app.get("/logout", (req, res) => {
 });
 
 //LINKS ROUTES ------------------------------------------
-let db: Db | any;
+let db;
 connectToDb((err) => {
   if (err) return;
   db = getDb();
@@ -154,7 +154,7 @@ app.post("/createBasicLink", (req, res) => {
       db
         .collection("links")
         .findOne({ toUrl: link.toUrl, userId: link.userId })
-        .then((response: any) => {
+        .then((response) => {
           if (response) {
             res.status(409).json({
               code: "CE-0001",
@@ -181,10 +181,10 @@ app.post("/createBasicLink", (req, res) => {
 
     db.collection("links")
       .insertOne(newLink)
-      .then((response: any) => {
+      .then((response) => {
         res.status(200).json({ response, newLink });
       })
-      .catch((err: any) => {
+      .catch((err) => {
         res.status(500).json(err);
       });
   }
@@ -208,7 +208,7 @@ app.post("/createCompleteLink", (req, res) => {
       db
         .collection("links")
         .findOne({ toUrl: link.toUrl, userId: link.userId })
-        .then((response: any) => {
+        .then((response) => {
           if (response) {
             res.status(409).json({
               code: "CE-0001",
@@ -233,28 +233,28 @@ app.post("/createCompleteLink", (req, res) => {
 
     db.collection("links")
       .insertOne(newLink)
-      .then((response: any) => {
+      .then((response) => {
         res.status(200).json({ response, newLink });
       })
-      .catch((err: any) => {
+      .catch((err) => {
         res.status(500).json(err);
       });
   }
   validation.result && searchLink();
 });
 app.get("/getAllLinks", (req, res) => {
-  const links: any = [];
+  const links = [];
   console.log("Pillando links?");
 
   db.collection("links")
     .find()
-    .forEach((link: any) => {
+    .forEach((link) => {
       links.push(link);
     })
     .then(() => {
       res.status(200).json({ links: links });
     })
-    .catch((err: any) => {
+    .catch((err) => {
       res.status(500).json(err);
     });
 });
@@ -263,17 +263,17 @@ app.get("/getUserLinks/:id", (req, res) => {
   const userId = req.params.id;
   if (!userId)
     res.status(400).json("Missing user. No user to search by it's urls.");
-  const links: any = [];
+  const links = [];
 
   db.collection("links")
     .find({ userId: userId })
-    .forEach((link: any) => {
+    .forEach((link) => {
       links.push(link);
     })
     .then(() => {
       res.status(200).json({ links: links });
     })
-    .catch((err: any) => {
+    .catch((err) => {
       res.status(500).json(err);
     });
 });
@@ -286,10 +286,10 @@ app.put("/links/:id", (req, res) => {
 
     db.collection("links")
       .updateOne({ _id: updateId }, { $set: updateLink })
-      .then((response: any) => {
+      .then((response) => {
         res.status(200).json(response);
       })
-      .catch((err: any) => {
+      .catch((err) => {
         res.status(500).json(err);
       });
   } else {
@@ -304,10 +304,10 @@ app.delete("/links/:id", (req, res) => {
 
     db.collection("links")
       .deleteOne({ _id: deleteId })
-      .then((response: any) => {
+      .then((response) => {
         res.status(200).json(response);
       })
-      .catch((err: any) => {
+      .catch((err) => {
         res.status(500).json(err);
       });
   } else {
@@ -315,13 +315,13 @@ app.delete("/links/:id", (req, res) => {
   }
 });
 
-const updateVisit = (linkId: string) => {
+const updateVisit = (linkId) => {
   if (ObjectId.isValid(linkId)) {
     const updateId = new ObjectId(linkId);
 
     db.collection("links")
       .updateOne({ _id: updateId }, { $inc: { numClicks: 1 } })
-      .then((response: any) => {});
+      .then((response) => { });
   }
 };
 
@@ -330,7 +330,7 @@ app.get("/:fromUrl", (req, res) => {
 
   db.collection("links")
     .findOne({ fromUrl: fromUrl })
-    .then((link: LinkType) => {
+    .then((link) => {
       if (link) {
         if (
           link.maxNumClicks &&
@@ -349,7 +349,7 @@ app.get("/:fromUrl", (req, res) => {
         res.status(404).json({ code: "SH-0001" });
       }
     })
-    .catch((err: any) => {
+    .catch((err) => {
       res.status(500).json(err);
     });
 });
@@ -360,14 +360,14 @@ app.post("/authorizeUrl", (req, res) => {
 
   db.collection("links")
     .findOne({ fromUrl: fromUrl, password: password })
-    .then((link: LinkType) => {
+    .then((link) => {
       if (link) {
         res.status(200).json(link);
       } else {
         res.status(404).json({ code: "SH-0002" });
       }
     })
-    .catch((err: any) => {
+    .catch((err) => {
       res.status(500).json(err);
     });
 });
