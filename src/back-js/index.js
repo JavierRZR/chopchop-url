@@ -244,7 +244,6 @@ app.post("/createCompleteLink", (req, res) => {
 });
 app.get("/getAllLinks", (req, res) => {
   const links = [];
-  console.log("Pillando links?");
 
   db.collection("links")
     .find()
@@ -374,7 +373,6 @@ app.post("/authorizeUrl", (req, res) => {
 
 // Start the server
 const port = process.env.PORT;
-console.log("Prueba de llegada")
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
