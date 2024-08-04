@@ -147,7 +147,7 @@ app.get(
   passport.authenticate("github", { failureRedirect: "/" }),
   generateTokenMiddleware,
   (req, res) => {
-    const redirectURL = process.env.FRONT_URL.startsWith('https') ? process.env.FRONT_URL : `https://${process.env.FRONT_URL}`;
+    const redirectURL = process.env.FRONT_URL;
     res.redirect(redirectURL);
   },
 );
@@ -157,7 +157,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   generateTokenMiddleware,
   (req, res) => {
-    const redirectURL = process.env.FRONT_URL.startsWith('https') ? process.env.FRONT_URL : `https://${process.env.FRONT_URL}`;
+    const redirectURL = process.env.FRONT_URL;
     res.redirect(redirectURL);
   }
 );
