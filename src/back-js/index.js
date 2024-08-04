@@ -54,7 +54,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
+      callbackURL: process.env.BACK_URL + "/auth/github/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       // Handle GitHub OAuth callback
@@ -68,7 +68,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: process.env.BACK_URL + '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       // Here you can handle user profile data
@@ -86,11 +86,17 @@ const generateTokenMiddleware = (req, res, next) => {
     name: reqUser?.displayName,
     avatarUrl: reqUser?.photos[0]?.value || null,
   };
+  console.log("DATA: " + returned);
   const token = jwt.sign(reqUser, process.env.JWT_SECRET_KEY, {
     expiresIn: "5h",
   });
+  console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
-  res.cookie("token", token, { httpOnly: true }); // Send token as a cookie to the client
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
+    sameSite: 'None' // Necesario si frontend y backend están en dominios diferentes
+  }); // Send token as a cookie to the client
 
   next();
 };
