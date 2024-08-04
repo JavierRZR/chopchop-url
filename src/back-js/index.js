@@ -38,6 +38,16 @@ app.use(
   })
 );
 
+console.log(process.env);
+const enforceHTTPS = (req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  next();
+};
+
+app.use(enforceHTTPS);
+
 // Initialize passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -106,18 +116,38 @@ app.get(
   "/auth/github",
   passport.authenticate("github", { scope: ["user:email"] }),
 );
+// app.get(
+//   "/auth/github/callback",
+//   passport.authenticate("github", { failureRedirect: "/" }),
+//   generateTokenMiddleware,
+//   (req, res) => {
+//     console.log("hemos llegado ya?");
+//     res.redirect(process.env.FRONT_URL);
+//   },
+// );
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+// app.get(
+//   '/auth/google/callback',
+//   passport.authenticate('google', { failureRedirect: '/' }),
+//   generateTokenMiddleware,
+//   (req, res) => {
+//     // Successful authentication, redirect to home.
+//     res.redirect(process.env.FRONT_URL);
+//   }
+// );
+
 app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/" }),
   generateTokenMiddleware,
   (req, res) => {
-    console.log("hemos llegado ya?");
-    res.redirect(process.env.FRONT_URL);
+    const redirectURL = process.env.FRONT_URL.startsWith('https') ? process.env.FRONT_URL : `https://${process.env.FRONT_URL}`;
+    res.redirect(redirectURL);
   },
-);
-app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 app.get(
@@ -125,8 +155,8 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   generateTokenMiddleware,
   (req, res) => {
-    // Successful authentication, redirect to home.
-    res.redirect(process.env.FRONT_URL);
+    const redirectURL = process.env.FRONT_URL.startsWith('https') ? process.env.FRONT_URL : `https://${process.env.FRONT_URL}`;
+    res.redirect(redirectURL);
   }
 );
 // Route to handle user data retrieval based on token
