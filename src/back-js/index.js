@@ -130,7 +130,6 @@ app.get("/user", (req, res) => {
 
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
-  console.log("REQ.COOKIES" + req.cookies)
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
