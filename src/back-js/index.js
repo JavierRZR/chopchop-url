@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from "express";
-// import session from "express-session";
-import session from "cookie-session";
+import session from "express-session";
+// import session from "cookie-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import cors from "cors";
@@ -23,11 +23,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
+// app.use(
+//   session({
+//     name: 'session',
+//     keys: [process.env.SESSION_SECRET_KEY],
+//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+//   })
+// );
 app.use(
   session({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET_KEY],
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
   })
 );
 
