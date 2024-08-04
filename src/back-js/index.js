@@ -134,6 +134,7 @@ app.get("/logout", (req, res) => {
 //LINKS ROUTES ------------------------------------------
 let db;
 connectToDb((err) => {
+  console.log("Ha habido un error?" + err);
   if (err) return;
   db = getDb();
 });
