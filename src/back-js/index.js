@@ -22,7 +22,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-
+app.enable("trust proxy");
 // app.use(
 //   session({
 //     name: 'session',
@@ -65,6 +65,7 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "/auth/github/callback",
+      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       // Handle GitHub OAuth callback
@@ -79,6 +80,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
+      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       // Here you can handle user profile data
