@@ -54,7 +54,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.BACK_URL + "/auth/github/callback",
+      callbackURL: "/auth/github/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       // Handle GitHub OAuth callback
@@ -68,7 +68,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.BACK_URL + '/auth/google/callback',
+      callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       // Here you can handle user profile data
