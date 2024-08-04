@@ -117,6 +117,7 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
+  generateTokenMiddleware,
   (req, res) => {
     // Successful authentication, redirect to home.
     res.redirect(process.env.FRONT_URL);
@@ -128,7 +129,8 @@ app.get("/user", (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
 
   const token = String(req.cookies.token);
-
+  console.log("TOKEN: " + req.cookies.token);
+  console.log("REQ.COOKIES" + req.cookies)
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
