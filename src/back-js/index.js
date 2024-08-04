@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import cors from "cors";
 import { Strategy as GithubStrategy } from "passport-github";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
 import { Db, ObjectId } from "mongodb";
 import { connectToDb, getDb } from "./db.js";
@@ -24,11 +25,10 @@ app.use(cookieParser());
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET_KEY,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  }),
+    name: 'session',
+    keys: [process.env.SESSION_SECRET_KEY],
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
 );
 
 // Initialize passport middleware
@@ -55,6 +55,19 @@ passport.use(
       return done(null, profile);
     },
   ),
+);
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Here you can handle user profile data
+      return done(null, profile);
+    }
+  )
 );
 
 // Custom middleware to generate JWT token and store it in a session cookie
@@ -88,6 +101,19 @@ app.get(
     console.log("hemos llegado ya?");
     res.redirect(process.env.FRONT_URL);
   },
+);
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect to home.
+    res.redirect(process.env.FRONT_URL);
+  }
 );
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
@@ -134,7 +160,7 @@ app.get("/logout", (req, res) => {
 //LINKS ROUTES ------------------------------------------
 let db;
 connectToDb((err) => {
-  console.log("Ha habido un error?" + err);
+  err && console.log("Ha habido un error? " + err);
   if (err) return;
   db = getDb();
 });

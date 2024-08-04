@@ -14,6 +14,9 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const loginWithGitHub = () => {
     window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/github`;
   };
+  const loginWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/google`;
+  };
 
   useEffect(() => {
     // Check if the user is authenticated when the component mounts
@@ -23,9 +26,12 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const checkAuthentication = async () => {
     try {
       // Check if the user is authenticated by sending a request to the backend
-      const response = await axios.get(`${import.meta.env.VITE_BACK_URL}/user`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/user`,
+        {
+          withCredentials: true,
+        },
+      );
       const loggedUser = response.data;
       loginUser(loggedUser);
       // setUser(loggedUser);
@@ -37,10 +43,16 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   return (
     <>
       {!user && (
-        <Button onClick={loginWithGitHub}>
-          {text}
-          <ArrowRightIcon size={20} color="#888" />
-        </Button>
+        <>
+          <Button onClick={loginWithGitHub}>
+            {text}
+            <ArrowRightIcon size={20} color="#888" />
+          </Button>
+          <Button onClick={loginWithGoogle}>
+            {text + " google"}
+            <ArrowRightIcon size={20} color="#888" />
+          </Button>
+        </>
       )}
     </>
   );
