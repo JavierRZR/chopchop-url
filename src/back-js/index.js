@@ -23,24 +23,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.enable("trust proxy");
-// app.use(
-//   session({
-//     name: 'session',
-//     keys: [process.env.SESSION_SECRET_KEY],
-//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-//     cookie: { secure: true },
-//     secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-//     sameSite: 'None', // Necesario si frontend y backend están en dominios diferentes
-//   })
-// );
 app.use(
   session({
-    secret: process.env.SESSION_SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
+    name: 'session',
+    keys: [process.env.SESSION_SECRET_KEY],
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
     cookie: { secure: true, sameSite: 'none' },
+    secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
+    sameSite: 'none', // Necesario si frontend y backend están en dominios diferentes
   })
 );
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: true, sameSite: 'none' },
+//   })
+// );
 
 const enforceHTTPS = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
