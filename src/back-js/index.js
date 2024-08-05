@@ -38,7 +38,7 @@ app.use(
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: true, sameSite: 'none' },
   })
 );
 
@@ -109,8 +109,9 @@ const generateTokenMiddleware = (req, res, next) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
+    sameSite: 'none'
   }); // Send token as a cookie to the client
-
+  console.log("????" + String(res.cookie.token));
   next();
 };
 
@@ -151,6 +152,7 @@ app.get("/user", (req, res) => {
 
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
+  console.log("COOKIES" + String(req.cookies));
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
