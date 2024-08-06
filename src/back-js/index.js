@@ -17,30 +17,29 @@ dotenv.config();
 const app = express(); // Create an instance of Express
 app.use(express.json());
 const corsOptions = {
-  origin: "*", // Allow requests from your frontend origin
+  origin: process.env.FRONT_URL, // Allow requests from your frontend origin
   credentials: true, // Allow credentials (cookies, authorization headers)
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.enable("trust proxy");
-app.use(
-  session({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET_KEY],
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    cookie: { secure: true, sameSite: 'none' },
-    secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-    sameSite: 'none', // Necesario si frontend y backend están en dominios diferentes
-  })
-);
+// app.enable("trust proxy");
 // app.use(
 //   session({
-//     secret: process.env.SESSION_SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { secure: true, sameSite: 'none' },
+//     name: 'session',
+//     keys: [process.env.SESSION_SECRET_KEY],
+//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+//     cookie: { secure: true },
+//     secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
 //   })
 // );
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
 
 const enforceHTTPS = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
@@ -67,7 +66,6 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "/auth/github/callback",
-      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       // Handle GitHub OAuth callback
@@ -82,7 +80,6 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
-      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       // Here you can handle user profile data
@@ -100,7 +97,6 @@ const generateTokenMiddleware = (req, res, next) => {
     name: reqUser?.displayName,
     avatarUrl: reqUser?.photos[0]?.value || null,
   };
-  console.log("DATA: " + returned);
   const token = jwt.sign(reqUser, process.env.JWT_SECRET_KEY, {
     expiresIn: "5h",
   });
@@ -108,10 +104,13 @@ const generateTokenMiddleware = (req, res, next) => {
   req.session.token = token; // Store token in session
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-    sameSite: 'none'
-  }); // Send token as a cookie to the client
-  console.log("????" + String(res.cookie.token));
+    // secure: process.env.NODE_ENV === 'production',
+    secure: true,
+    sameSite: 'none',
+    domain: "chopchop-url.vercel.app"
+  });
+
+  console.log('Cookie set:', res.getHeader('Set-Cookie'));
   next();
 };
 
@@ -149,10 +148,9 @@ app.get(
 app.get("/user", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
-
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
-  console.log("COOKIES" + String(req.cookies));
+  console.log("sessionToken: " + req.session.token);
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
@@ -191,7 +189,6 @@ app.get("/logout", (req, res) => {
 //LINKS ROUTES ------------------------------------------
 let db;
 connectToDb((err) => {
-  err && console.log("Ha habido un error? " + err);
   if (err) return;
   db = getDb();
 });
