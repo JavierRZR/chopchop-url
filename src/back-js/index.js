@@ -103,7 +103,7 @@ const generateTokenMiddleware = (req, res, next) => {
   console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
   res.cookie("token", token, {
-    httpOnly: true,
+    // httpOnly: true,
     // secure: process.env.NODE_ENV === 'production',
     secure: true,
     sameSite: 'none',
