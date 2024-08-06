@@ -22,7 +22,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-// app.enable("trust proxy");
+app.enable("trust proxy", 1);
 // app.use(
 //   session({
 //     name: 'session',
