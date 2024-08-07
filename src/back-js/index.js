@@ -7,7 +7,7 @@ import passport from "passport";
 import cors from "cors";
 import { Strategy as GithubStrategy } from "passport-github";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import jwt from "jsonwebtoken";
+import jwt, { sign } from "jsonwebtoken";
 import { Db, ObjectId } from "mongodb";
 import { connectToDb, getDb } from "./db.js";
 import { validateEasyLink, validateComplexLink } from "./validation.js";
@@ -102,20 +102,16 @@ const generateTokenMiddleware = (req, res, next) => {
   });
   console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
-  // res.cookie("token", token, {
-  //   // httpOnly: true,
-  //   // secure: process.env.NODE_ENV === 'production',
-  //   secure: true,
-  //   sameSite: 'none',
-  //   domain: "chopchop-url.vercel.app"
-  // });
-
-  res.cookie('token', token, {
-    path, httponly,
-    sameSite,
-    secure,
-    withCredentials
-  })
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    secure: true,
+    sameSite: 'none',
+    domain: "chopchop-url.vercel.app",
+    withCredentials: true,
+    sign: "jrr"
+  });
 
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
   next();
