@@ -109,8 +109,7 @@ const generateTokenMiddleware = (req, res, next) => {
     secure: true,
     sameSite: 'none',
     domain: "chopchop-url.vercel.app",
-    withCredentials: true,
-    sign: "jrr"
+    withCredentials: true
   });
 
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
