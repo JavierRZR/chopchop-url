@@ -111,6 +111,7 @@ const generateTokenMiddleware = (req, res, next) => {
     domain: "chopchop-url.vercel.app",
     withCredentials: true
   });
+  res.set('Set-Cookie', 'elpito="1234pitos"')
 
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
   next();
@@ -148,6 +149,9 @@ app.get(
 
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
+  const pito = req.headers.cookie.split('=');
+  console.log(pito);
+
   res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
   const token = String(req.cookies.token);
