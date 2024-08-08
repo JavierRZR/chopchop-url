@@ -143,6 +143,16 @@ app.get(
   generateTokenMiddleware,
   (req, res) => {
     // Successful authentication, redirect to home.
+    res.cookie("token", "pito", {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      secure: true,
+      maxAge: 100 * 60 * 60 * 48,
+      sameSite: 'none',
+      domain: "chopchop-url.vercel.app",
+      withCredentials: true
+    });
     res.redirect(process.env.FRONT_URL);
   }
 );
