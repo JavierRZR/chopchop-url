@@ -160,6 +160,11 @@ app.get("/user", (req, res) => {
   console.log("TOKEN: " + req.cookies.token);
   console.log("sessionToken: " + req.session.token);
   console.log("Ricardo: " + token);
+
+  const token2 = req.headers.cookie;
+  console.log("token 2" + token2);
+
+
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
