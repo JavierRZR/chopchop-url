@@ -39,7 +39,12 @@ app.use(
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      // domain: "chopchop-url.vercel.app",
+    },
   })
 );
 
