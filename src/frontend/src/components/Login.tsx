@@ -5,6 +5,8 @@ import { useLoginContext } from "../contexts/LoginProvider";
 import { useTranslation } from "react-i18next";
 import { ArrowRightIcon } from "../assets/svg";
 
+axios.defaults.withCredentials = true;
+
 const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const { t } = useTranslation();
   const { user, loginUser } = useLoginContext();
@@ -30,6 +32,10 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
         `${import.meta.env.VITE_BACK_URL}/user`,
         {
           withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
         },
       );
       const loggedUser = response.data;
