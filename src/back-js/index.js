@@ -23,6 +23,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.enable("trust proxy", 1);
+app.set("trust proxy", 1);
+
 // app.use(
 //   session({
 //     name: 'session',
@@ -107,12 +109,11 @@ const generateTokenMiddleware = (req, res, next) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     secure: true,
+    maxAge: 100 * 60 * 60 * 48,
     sameSite: 'none',
     domain: "chopchop-url.vercel.app",
     withCredentials: true
   });
-  res.set('Set-Cookie', 'elpito="1234pitos"')
-
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
   next();
 };
@@ -149,9 +150,6 @@ app.get(
 
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
-  const pito = req.headers.cookie.split('=');
-  console.log(pito);
-
   res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
   const token = String(req.cookies.token);
