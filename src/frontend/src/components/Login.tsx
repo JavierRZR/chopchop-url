@@ -40,17 +40,39 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
       // );
       // const loggedUser = response.data;
 
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      // const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
+      //   method: "GET",
+      //   credentials: "include",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      const response = await fetch("https://chopchop-url.onrender.com/user", {
+        headers: {
+          accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+          "accept-language": "es-ES,es;q=0.5",
+          "cache-control": "no-cache",
+          pragma: "no-cache",
+          priority: "u=0, i",
+          "sec-ch-ua":
+            '"Not)A;Brand";v="99", "Brave";v="127", "Chromium";v="127"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"Windows"',
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "sec-fetch-user": "?1",
+          "sec-gpc": "1",
+          "upgrade-insecure-requests": "1",
+        },
+        referrerPolicy: "strict-origin-when-cross-origin",
+        body: null,
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+      });
 
       const loggedUser = await response.json();
       loginUser(loggedUser);
