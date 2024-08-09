@@ -28,17 +28,31 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const checkAuthentication = async () => {
     try {
       // Check if the user is authenticated by sending a request to the backend
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACK_URL}/user`,
-        {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
+      // const response = await axios.get(
+      //   `${import.meta.env.VITE_BACK_URL}/user`,
+      //   {
+      //     withCredentials: true,
+      //     // headers: {
+      //     //   "Access-Control-Allow-Origin": "*",
+      //     //   "Content-Type": "application/json",
+      //     // },
+      //   },
+      // );
+      // const loggedUser = response.data;
+
+      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
-      const loggedUser = response.data;
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const loggedUser = await response.json();
       loginUser(loggedUser);
       // setUser(loggedUser);
     } catch (error) {
