@@ -154,8 +154,8 @@ app.get(
 
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
-  res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
+  // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
+  // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
   console.log("sessionToken: " + req.session.token);
