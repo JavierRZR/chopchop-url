@@ -110,7 +110,7 @@ const generateTokenMiddleware = (req, res, next) => {
   console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
   res.cookie("token", token, {
-    path: "/",
+    // path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 100 * 60 * 60 * 48,
@@ -154,12 +154,10 @@ app.get(
 
 // Route to handle user data retrieval based on token
 app.get("/user", (req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
-  // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
+  res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
-  console.log("sessionToken: " + req.session.token);
-  console.log("Ricardo: " + token);
 
   const token2 = req.headers.cookie;
   console.log("token 2" + token2);
