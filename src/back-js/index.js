@@ -112,9 +112,7 @@ const generateTokenMiddleware = (req, res, next) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 100 * 60 * 60 * 48,
-    sameSite: 'lax',
     // domain: "chopchop-url.vercel.app",
-    withCredentials: true,
   });
   //!IMPORTANTE
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
