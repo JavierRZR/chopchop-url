@@ -157,12 +157,6 @@ app.get(
 app.get("/user", (req, res) => {
   // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
   // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
-  app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', process.env.FRONT_URL);
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cookie');
-    next();
-  });
   const token = String(req.cookies.token);
   console.log("TOKEN: " + req.cookies.token);
 
