@@ -12,7 +12,7 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const { t } = useTranslation();
   const { user, loginUser } = useLoginContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [token, setToken] = useState(searchParams.get("token"));
+  const [token] = useState(searchParams.get("token"));
 
   const text = t(`btn.${type}`);
 
