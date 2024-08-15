@@ -36,9 +36,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      // httpOnly: true,
+      httpOnly: true,
       secure: true,
-      // sameSite: 'none',
+      sameSite: 'lax',
       // domain: "chopchop-url.vercel.app",
     },
   })
@@ -112,10 +112,9 @@ const generateTokenMiddleware = (req, res, next) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 100 * 60 * 60 * 48,
-    sameSite: 'none',
+    sameSite: 'lax',
     // domain: "chopchop-url.vercel.app",
     withCredentials: true,
-    credentials: true
   });
   //!IMPORTANTE
   console.log('Cookie set:', res.getHeader('Set-Cookie'));

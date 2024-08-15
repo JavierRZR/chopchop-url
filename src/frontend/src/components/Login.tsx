@@ -14,24 +14,10 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const text = t(`btn.${type}`);
 
   const loginWithGitHub = () => {
-    // window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/github`;
-    axios.get(`${import.meta.env.VITE_BACK_URL}/auth/github`, {
-      withCredentials: true,
-      headers: {
-        // "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
+    window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/github`;
   };
   const loginWithGoogle = () => {
-    // window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/google`;
-    axios.get(`${import.meta.env.VITE_BACK_URL}/auth/google`, {
-      withCredentials: true,
-      headers: {
-        // "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
+    window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/google`;
   };
 
   useEffect(() => {
