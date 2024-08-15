@@ -10,7 +10,7 @@ export function validateEasyLink(link) {
 }
 
 
-export function validateComplexLink() {
+export function validateComplexLink(link) {
   if (!link.toUrl || !URL_REGEX.test(link.toUrl)) return { result: false, code: "VL-0001" };
   if (!link.fromUrl || !FROM_URL_REGEX.test(link.fromUrl)) return { result: false, code: "VL-0002" };
   if (link.description && link.description.length > 300) return { result: false, code: "VL-0003" };
