@@ -16,11 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 const app = express(); // Create an instance of Express
 app.use(express.json());
-const corsOptions = {
-  origin: process.env.FRONT_URL, // Allow requests from your frontend origin
-  credentials: true, // Allow credentials (cookies, authorization headers)
-};
-app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.enable("trust proxy", 1);
 app.set("trust proxy", 1);
@@ -40,9 +36,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true,
+      // httpOnly: true,
       secure: true,
-      sameSite: 'none',
+      // sameSite: 'none',
       // domain: "chopchop-url.vercel.app",
     },
   })
@@ -109,15 +105,19 @@ const generateTokenMiddleware = (req, res, next) => {
   });
   console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
-  res.cookie("token", token, {
+
+  //!IMPORTANTE
+  res.cookie('token', token, {
     // path: "/",
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 100 * 60 * 60 * 48,
+    // secure: process.env.NODE_ENV === 'production',
+    // maxAge: 100 * 60 * 60 * 48,
     sameSite: 'none',
     // domain: "chopchop-url.vercel.app",
-    // withCredentials: true
+    // withCredentials: true,
+    // credentials: true
   });
+  //!IMPORTANTE
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
   next();
 };

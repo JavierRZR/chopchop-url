@@ -28,22 +28,22 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const checkAuthentication = async () => {
     try {
       // Check if the user is authenticated by sending a request to the backend
-      // const response = await axios.get(
-      //   `${import.meta.env.VITE_BACK_URL}/user`,
-      //   {
-      //     withCredentials: true,
-      //     headers: {
-      //       "Access-Control-Allow-Origin": "*",
-      //       "Content-Type": "application/json",
-      //     },
-      //   },
-      // );
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACK_URL}/user`,
+        {
+          withCredentials: true,
+          headers: {
+            // "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        },
+      );
 
-      const instance = axios.create({
-        withCredentials: true,
-        baseURL: import.meta.env.VITE_BACK_URL,
-      });
-      const response = await instance.get("/user");
+      // const instance = axios.create({
+      //   withCredentials: true,
+      //   baseURL: import.meta.env.VITE_BACK_URL,
+      // });
+      // const response = await instance.get("/user");
       const loggedUser = response.data;
 
       // const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
