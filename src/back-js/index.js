@@ -194,6 +194,38 @@ app.get("/user", (req, res) => {
     res.status(200).json(returned);
   });
 });
+app.post("/user", (req, res) => {
+  // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
+  // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
+  // const token = String(req.cookies.token);
+  // console.log("TOKEN: " + req.cookies.token);
+
+  // const token2 = req.headers.cookie;
+  // console.log("token 2" + token2);
+  const token = req.body.token;
+  console.log("TOkencillo travieso: " + token)
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    // Token is valid, extract user information from decoded token
+    const userData = decoded;
+
+    const returned = {
+      id: userData?.id,
+      username: userData?.username,
+      name: userData?.displayName,
+      avatarUrl: userData?.photos[0]?.value || null,
+    };
+
+    res.status(200).json(returned);
+  });
+});
 
 app.get("/logout", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
