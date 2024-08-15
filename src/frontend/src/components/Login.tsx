@@ -32,13 +32,19 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
       //   `${import.meta.env.VITE_BACK_URL}/user`,
       //   {
       //     withCredentials: true,
-      //     // headers: {
-      //     //   "Access-Control-Allow-Origin": "*",
-      //     //   "Content-Type": "application/json",
-      //     // },
+      //     headers: {
+      //       "Access-Control-Allow-Origin": "*",
+      //       "Content-Type": "application/json",
+      //     },
       //   },
       // );
-      // const loggedUser = response.data;
+
+      const instance = axios.create({
+        withCredentials: true,
+        baseURL: import.meta.env.VITE_BACK_URL,
+      });
+      const response = await instance.get("/user");
+      const loggedUser = response.data;
 
       // const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
       //   method: "GET",
@@ -48,17 +54,17 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
       //   },
       // });
 
-      const response = await fetch("https://chopchop-url.onrender.com/user", {
-        method: "GET",
-        credentials: "include", // Incluye cookies en la solicitud
-        headers: {
-          "Content-Type": "application/json", // Asegúrate de que el backend espera este tipo de contenido
-        },
-      });
-      if (!response.ok) {
-        throw new Error("No ha logeado una mierda");
-      }
-      const loggedUser = await response.json();
+      // const response = await fetch("https://chopchop-url.onrender.com/user", {
+      //   method: "GET",
+      //   credentials: "include", // Incluye cookies en la solicitud
+      //   headers: {
+      //     "Content-Type": "application/json", // Asegúrate de que el backend espera este tipo de contenido
+      //   },
+      // });
+      // if (!response.ok) {
+      //   throw new Error("No ha logeado una mierda");
+      // }
+      // const loggedUser = await response.json();
       loginUser(loggedUser);
       // setUser(loggedUser);
     } catch (error) {
