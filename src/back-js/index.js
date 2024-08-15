@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from "express";
-// import session from "express-session";
-import session from "cookie-session";
+import session from "express-session";
+// import session from "cookie-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import cors from "cors";
@@ -28,30 +28,30 @@ app.use(cookieParser());
 app.enable("trust proxy", 1);
 app.set("trust proxy", 1);
 
-app.use(
-  session({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET_KEY],
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    cookie: { secure: true, httpOnly: true, sameSite: "none" },
-    httpOnly: true,
-    sameSite: "none",
-    secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-  })
-);
 // app.use(
 //   session({
-//     secret: process.env.SESSION_SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       httpOnly: true,
-//       secure: true,
-//       sameSite: 'none',
-//       // domain: "chopchop-url.vercel.app",
-//     },
+//     name: 'session',
+//     keys: [process.env.SESSION_SECRET_KEY],
+//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+//     cookie: { secure: true, httpOnly: true, sameSite: "none" },
+//     httpOnly: true,
+//     sameSite: "none",
+//     secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
 //   })
 // );
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      // domain: "chopchop-url.vercel.app",
+    },
+  })
+);
 
 const enforceHTTPS = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
@@ -125,7 +125,10 @@ const generateTokenMiddleware = (req, res, next) => {
   });
   //!IMPORTANTE
   console.log('Cookie set:', res.getHeader('Set-Cookie'));
-  next();
+  // next();
+
+  res.redirect(process.env.FRONT_URL + "?token=" + token);
+
 };
 
 //AUTH ROUTES ------------------------------------------
@@ -139,9 +142,7 @@ app.get(
   generateTokenMiddleware,
   (req, res) => {
     console.log("hemos llegado ya?");
-    setTimeout(() => {
-      res.redirect(process.env.FRONT_URL);
-    }, 3000);
+    // res.redirect(process.env.FRONT_URL);
   },
 );
 app.get(
@@ -155,9 +156,7 @@ app.get(
   generateTokenMiddleware,
   (req, res) => {
     // Successful authentication, redirect to home.
-    setTimeout(() => {
-      res.redirect(process.env.FRONT_URL);
-    }, 3000);
+    // res.redirect(process.env.FRONT_URL);
   }
 );
 
