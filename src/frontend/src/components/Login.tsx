@@ -33,9 +33,12 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
       searchParams.delete("token");
       setSearchParams();
       try {
-        const response = await axios.post("http://localhost:5000/user", {
-          token: token,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACK_URL}/user`,
+          {
+            token: token,
+          },
+        );
         console.log(response.data);
         loginUser(response.data);
         // Check if the user is authenticated by sending a request to the backend
