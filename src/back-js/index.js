@@ -17,6 +17,13 @@ dotenv.config();
 const app = express(); // Create an instance of Express
 app.use(express.json());
 
+const corsOptions = {
+  origin: process.env.FRONT_URL, // Allow requests from your frontend origin
+  credentials: true, // Allow credentials (cookies, authorization headers)
+};
+app.use(cors(corsOptions));
+
+
 app.use(cookieParser());
 app.enable("trust proxy", 1);
 app.set("trust proxy", 1);
