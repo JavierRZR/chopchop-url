@@ -11,16 +11,16 @@ const Profile = () => {
 
   const profileImage = () => {
     return user?.avatarUrl && user.avatarUrl != "" ? (
-      <img className="size-12 rounded-full" src={user.avatarUrl} />
+      <img className="size-10 rounded-full" src={user.avatarUrl} />
     ) : (
-      <ProfileIcon color="#999" size={40} />
+      <ProfileIcon color="#999" size={30} />
     );
   };
 
   return (
     <>
       {user && (
-        <IconButton>
+        <IconButton scale={false}>
           <Dropdown
             color={"transparent"}
             label={profileImage()}

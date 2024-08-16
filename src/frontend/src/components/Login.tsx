@@ -6,13 +6,31 @@ import { useLoginContext } from "../contexts/LoginProvider";
 import { useTranslation } from "react-i18next";
 import { ArrowRightIcon } from "../assets/svg";
 
-axios.defaults.withCredentials = true;
+function setCookie(name: string, value: string, days: number) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name: string) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
 
 const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const { t } = useTranslation();
   const { user, loginUser } = useLoginContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [token] = useState(searchParams.get("token"));
+  let [token] = useState(searchParams.get("token") || getCookie("tokencillo"));
 
   const text = t(`btn.${type}`);
 
@@ -39,50 +57,11 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
             token: token,
           },
         );
-        console.log(response.data);
         loginUser(response.data);
-        // Check if the user is authenticated by sending a request to the backend
-        // const response = await axios.get(
-        //   `${import.meta.env.VITE_BACK_URL}/user`,
-        //   {
-        //     withCredentials: true,
-        //     headers: {
-        //       // "Access-Control-Allow-Origin": "*",
-        //       "Content-Type": "application/json",
-        //     },
-        //   },
-        // );
-        // const instance = axios.create({
-        //   withCredentials: true,
-        //   baseURL: import.meta.env.VITE_BACK_URL,
-        // });
-        // const response = await instance.get("/user");
-        // const loggedUser = response.data;
-        // const response = await fetch(`${import.meta.env.VITE_BACK_URL}/user`, {
-        //   method: "GET",
-        //   credentials: "include",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // const response = await fetch("https://chopchop-url.onrender.com/user", {
-        //   method: "GET",
-        //   credentials: "include", // Incluye cookies en la solicitud
-        //   headers: {
-        //     "Content-Type": "application/json", // Asegúrate de que el backend espera este tipo de contenido
-        //   },
-        // });
-        // if (!response.ok) {
-        //   throw new Error("No ha logeado una mierda");
-        // }
-        // const loggedUser = await response.json();
-        // loginUser(loggedUser);
-        // setUser(loggedUser);
+        setCookie("tokencillo", token, 1);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
-    } else {
-      console.log("no token");
     }
   };
 

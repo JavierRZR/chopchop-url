@@ -45,6 +45,8 @@ export const LoginContextProvider: React.FC<LoginProviderProps> = ({
 
   // Method to clear the user data (logout)
   const logoutUser = async () => {
+    document.cookie =
+      "tokencillo=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     try {
       // Make a request to the logout endpoint
       await axios.get(`${import.meta.env.VITE_BACK_URL}/logout`, {

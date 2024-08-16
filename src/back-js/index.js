@@ -112,10 +112,8 @@ const generateTokenMiddleware = (req, res, next) => {
   const token = jwt.sign(reqUser, process.env.JWT_SECRET_KEY, {
     expiresIn: "5h",
   });
-  console.log("TOKEN222: " + token);
   req.session.token = token; // Store token in session
 
-  //!IMPORTANTE
   res.cookie('token', token, {
     // path: "/",
     httpOnly: true,
@@ -123,8 +121,6 @@ const generateTokenMiddleware = (req, res, next) => {
     maxAge: 100 * 60 * 60 * 48,
     // domain: "chopchop-url.vercel.app",
   });
-  //!IMPORTANTE
-  console.log('Cookie set:', res.getHeader('Set-Cookie'));
   // next();
 
   res.redirect(process.env.FRONT_URL + "?token=" + token);
@@ -141,7 +137,6 @@ app.get(
   passport.authenticate("github", { failureRedirect: "/" }),
   generateTokenMiddleware,
   (req, res) => {
-    console.log("hemos llegado ya?");
     // res.redirect(process.env.FRONT_URL);
   },
 );
@@ -162,48 +157,41 @@ app.get(
 
 
 // Route to handle user data retrieval based on token
-app.get("/user", (req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
-  // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
-  const token = String(req.cookies.token);
-  console.log("TOKEN: " + req.cookies.token);
+//!No funciona el get porque no se mandan las cookies xd
+// app.get("/user", (req, res) => {
+//   // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
+//   // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
+//   const token = String(req.cookies.token);
+//   console.log("TOKEN: " + req.cookies.token);
 
-  const token2 = req.headers.cookie;
-  console.log("token 2" + token2);
+//   const token2 = req.headers.cookie;
+//   console.log("token 2" + token2);
 
 
-  if (!token) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+//   if (!token) {
+//     return res.status(401).json({ error: "Unauthorized" });
+//   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: "Invalid token" });
-    }
+//   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+//     if (err) {
+//       return res.status(401).json({ error: "Invalid token" });
+//     }
 
-    // Token is valid, extract user information from decoded token
-    const userData = decoded;
+//     // Token is valid, extract user information from decoded token
+//     const userData = decoded;
 
-    const returned = {
-      id: userData?.id,
-      username: userData?.username,
-      name: userData?.displayName,
-      avatarUrl: userData?.photos[0]?.value || null,
-    };
+//     const returned = {
+//       id: userData?.id,
+//       username: userData?.username,
+//       name: userData?.displayName,
+//       avatarUrl: userData?.photos[0]?.value || null,
+//     };
 
-    res.status(200).json(returned);
-  });
-});
+//     res.status(200).json(returned);
+//   });
+// });
 app.post("/user", (req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
-  // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
-  // const token = String(req.cookies.token);
-  // console.log("TOKEN: " + req.cookies.token);
-
-  // const token2 = req.headers.cookie;
-  // console.log("token 2" + token2);
   const token = req.body.token;
-  console.log("TOkencillo travieso: " + token)
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
@@ -212,17 +200,14 @@ app.post("/user", (req, res) => {
     if (err) {
       return res.status(401).json({ error: "Invalid token" });
     }
-
     // Token is valid, extract user information from decoded token
     const userData = decoded;
-
     const returned = {
       id: userData?.id,
       username: userData?.username,
       name: userData?.displayName,
       avatarUrl: userData?.photos[0]?.value || null,
     };
-
     res.status(200).json(returned);
   });
 });
