@@ -30,13 +30,13 @@ const LanguageSwitch = () => {
           />
           <div
             className="peer relative h-6 w-11 rounded-full 
-          bg-[url('es.svg')] duration-100 
+          bg-[url('/es.svg')] duration-100 
           after:absolute after:start-[0px] after:top-[0px] after:h-6 
           after:w-6 after:rounded-full 
            after:border after:bg-neutral-300 after:transition-all after:content-[''] 
-          peer-checked:bg-[url('en.svg')]
+          peer-checked:bg-[url('/en.svg')]
            peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-neutral-100 rtl:peer-checked:after:-translate-x-full 
-           dark:bg-[url('es.svg')]
+           dark:bg-[url('/es.svg')]
          dark:peer-focus:ring-neutral-900"
           ></div>
         </label>
