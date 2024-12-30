@@ -12,7 +12,7 @@ import { useLoginContext } from "../contexts/LoginProvider";
 import UrlCard from "./UrlCard";
 
 const URL_REGEX: RegExp =
-  /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\.[a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:?#@!$&'()*+,;=]*)*\/?$/;
+  /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 const UrlInputField = () => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ const UrlInputField = () => {
   const [lastChopped, setLastChopped] = useState(null);
 
   const addBasicLink = async () => {
-    let newLink = {
+    const newLink = {
       userId: user?.id || null,
       toUrl: urlValue,
     };
