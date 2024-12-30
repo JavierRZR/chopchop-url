@@ -16,7 +16,7 @@ dependencies:
     version: 2.3.0
   flowbite-react:
     specifier: ^0.9.0
-    version: 0.9.0(react-dom@18.3.1)(react@18.3.1)(tailwindcss@3.4.3)
+    version: 0.9.0(react-dom@19.0.0)(react@18.3.1)(tailwindcss@3.4.3)
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
@@ -25,10 +25,10 @@ dependencies:
     version: 8.4.38
   prettier-plugin-tailwindcss:
     specifier: ^0.5.14
-    version: 0.5.14(prettier@3.2.5)
+    version: 0.5.14(prettier@3.4.2)
   react-toastify:
     specifier: ^10.0.5
-    version: 10.0.5(react-dom@18.3.1)(react@18.3.1)
+    version: 10.0.5(react-dom@19.0.0)(react@18.3.1)
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
@@ -277,7 +277,7 @@ packages:
       '@floating-ui/utils': 0.2.2
     dev: false
 
-  /@floating-ui/react-dom@2.0.9(react-dom@18.3.1)(react@18.3.1):
+  /@floating-ui/react-dom@2.0.9(react-dom@19.0.0)(react@18.3.1):
     resolution: {integrity: sha512-q0umO0+LQK4+p6aGyvzASqKbKOJcAHJ7ycE9CuUvfx3s9zTHWmGJTPOIlM/hmSBfUfg/XfY5YhLBLR/LHwShQQ==}
     peerDependencies:
       react: '>=16.8.0'
@@ -285,19 +285,19 @@ packages:
     dependencies:
       '@floating-ui/dom': 1.6.5
       react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react-dom: 19.0.0(react@18.3.1)
     dev: false
 
-  /@floating-ui/react@0.26.10(react-dom@18.3.1)(react@18.3.1):
+  /@floating-ui/react@0.26.10(react-dom@19.0.0)(react@18.3.1):
     resolution: {integrity: sha512-sh6f9gVvWQdEzLObrWbJ97c0clJObiALsFe0LiR/kb3tDRKwEhObASEH2QyfdoO/ZBPzwxa9j+nYFo+sqgbioA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/react-dom': 2.0.9(react-dom@18.3.1)(react@18.3.1)
+      '@floating-ui/react-dom': 2.0.9(react-dom@19.0.0)(react@18.3.1)
       '@floating-ui/utils': 0.2.2
       react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react-dom: 19.0.0(react@18.3.1)
       tabbable: 6.2.0
     dev: false
 
@@ -559,7 +559,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001618
+      caniuse-lite: 1.0.30001690
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -594,7 +594,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001618
+      caniuse-lite: 1.0.30001690
       electron-to-chromium: 1.4.768
       node-releases: 2.0.14
       update-browserslist-db: 1.0.16(browserslist@4.23.0)
@@ -605,8 +605,8 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
-  /caniuse-lite@1.0.30001618:
-    resolution: {integrity: sha512-p407+D1tIkDvsEAPS22lJxLQQaG8OTBEqo0KhzfABGk0TU4juBNDSfH0hyAp/HRyx+M8L17z/ltyhxh27FTfQg==}
+  /caniuse-lite@1.0.30001690:
+    resolution: {integrity: sha512-5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w==}
     dev: false
 
   /chalk@4.1.2:
@@ -789,7 +789,7 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
-  /flowbite-react@0.9.0(react-dom@18.3.1)(react@18.3.1)(tailwindcss@3.4.3):
+  /flowbite-react@0.9.0(react-dom@19.0.0)(react@18.3.1)(tailwindcss@3.4.3):
     resolution: {integrity: sha512-wRGzTPHaEuRSXiAFhdTuksezABE/AjI/iyOOBGZpsFAz/sq7zuorAqjRud9FWgy3TlFPtldl7kL93wNY2nOnKQ==}
     peerDependencies:
       react: '>=18'
@@ -797,12 +797,12 @@ packages:
       tailwindcss: ^3
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/react': 0.26.10(react-dom@18.3.1)(react@18.3.1)
+      '@floating-ui/react': 0.26.10(react-dom@19.0.0)(react@18.3.1)
       classnames: 2.5.1
       debounce: 2.0.0
       flowbite: 2.3.0
       react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react-dom: 19.0.0(react@18.3.1)
       react-icons: 5.0.1(react@18.3.1)
       tailwind-merge: 2.2.2
       tailwindcss: 3.4.3
@@ -1147,7 +1147,7 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.2.0
 
-  /prettier-plugin-tailwindcss@0.5.14(prettier@3.2.5):
+  /prettier-plugin-tailwindcss@0.5.14(prettier@3.4.2):
     resolution: {integrity: sha512-Puaz+wPUAhFp8Lo9HuciYKM2Y2XExESjeT+9NQoVFXZsPPnc9VYss2SpxdQ6vbatmt8/4+SN0oe0I1cPDABg9Q==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -1199,11 +1199,11 @@ packages:
       prettier-plugin-svelte:
         optional: true
     dependencies:
-      prettier: 3.2.5
+      prettier: 3.4.2
     dev: false
 
-  /prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+  /prettier@3.4.2:
+    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: false
@@ -1212,14 +1212,13 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
 
-  /react-dom@18.3.1(react@18.3.1):
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+  /react-dom@19.0.0(react@18.3.1):
+    resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
-      react: ^18.3.1
+      react: ^19.0.0
     dependencies:
-      loose-envify: 1.4.0
       react: 18.3.1
-      scheduler: 0.23.2
+      scheduler: 0.25.0
     dev: false
 
   /react-icons@5.0.1(react@18.3.1):
@@ -1230,7 +1229,7 @@ packages:
       react: 18.3.1
     dev: false
 
-  /react-toastify@10.0.5(react-dom@18.3.1)(react@18.3.1):
+  /react-toastify@10.0.5(react-dom@19.0.0)(react@18.3.1):
     resolution: {integrity: sha512-mNKt2jBXJg4O7pSdbNUfDdTsK9FIdikfsIE/yUCxbAEXl4HMyJaivrVFcn3Elvt5xvCQYhUZm+hqTIu1UXM3Pw==}
     peerDependencies:
       react: '>=18'
@@ -1238,7 +1237,7 @@ packages:
     dependencies:
       clsx: 2.1.1
       react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react-dom: 19.0.0(react@18.3.1)
     dev: false
 
   /react@18.3.1:
@@ -1321,10 +1320,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /scheduler@0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
-    dependencies:
-      loose-envify: 1.4.0
+  /scheduler@0.25.0:
+    resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
     dev: false
 
   /shebang-command@2.0.0:
