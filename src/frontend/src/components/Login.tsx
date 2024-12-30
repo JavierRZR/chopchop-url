@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "../ui/Button";
 import axios from "axios";
 import { useLoginContext } from "../contexts/LoginProvider";
 import { useTranslation } from "react-i18next";
 import { ArrowRightIcon } from "../assets/svg";
+import Modal from "../ui/Modal";
+import useModalContext from "../contexts/ModalContext";
 
 function setCookie(name: string, value: string, days: number) {
-  var expires = "";
+  let expires = "";
   if (days) {
-    var date = new Date();
+    const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     expires = "; expires=" + date.toUTCString();
   }
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 function getCookie(name: string) {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
     while (c.charAt(0) == " ") c = c.substring(1, c.length);
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
@@ -30,14 +32,23 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
   const { t } = useTranslation();
   const { user, loginUser } = useLoginContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  let [token] = useState(searchParams.get("token") || getCookie("tokencillo"));
+  const [token] = useState(
+    searchParams.get("token") || getCookie("tokencillo"),
+  );
+  const { toggleShow } = useModalContext();
 
   const text = t(`btn.${type}`);
 
   const loginWithGitHub = () => {
+    setTimeout(() => {
+      toggleShow("serverLoader");
+    }, 500);
     window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/github`;
   };
   const loginWithGoogle = () => {
+    setTimeout(() => {
+      toggleShow("serverLoader");
+    }, 500);
     window.location.href = `${import.meta.env.VITE_BACK_URL}/auth/google`;
   };
 
@@ -77,6 +88,14 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
             {text + " google"}
             <ArrowRightIcon size={20} color="#888" />
           </Button>
+
+          <Modal
+            id="serverLoader"
+            closeOutside={false}
+            header={t(`notification.serverLoaderTitle`)}
+          >
+            {t(`notification.serverLoader`)}
+          </Modal>
         </>
       )}
     </>

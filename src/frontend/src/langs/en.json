@@ -29,7 +29,9 @@
     "notification": {
       "copiedToCB": "Copied to clipboard",
       "successLinkCreate": "Link chopped successfully!",
-      "error": "An error has ocurred."
+      "error": "An error has ocurred.",
+      "serverLoaderTitle": "Loading server...",
+      "serverLoader": "Please wait, as it is a proyect for practice it is deployed under the lowest budget it can take a moment to start on the beggining. Thanks for the visit! :D"  
     },
     "forms": {
       "createLink": {
@@ -49,7 +51,8 @@
       },
       "passwordNavigate": {
         "header": "Protected link.",
-        "subheader": "Enter password."}
+        "subheader": "Enter password."
+      }
     },
     "errors": {
       "VL-0001": "Error with the destination URL, it does not meet the format or has not been entered.",

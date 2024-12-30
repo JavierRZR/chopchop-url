@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import express from "express";
 import session from "express-session";
 // import session from "cookie-session";
@@ -23,22 +23,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 app.use(cookieParser());
 app.enable("trust proxy", 1);
 app.set("trust proxy", 1);
 
-// app.use(
-//   session({
-//     name: 'session',
-//     keys: [process.env.SESSION_SECRET_KEY],
-//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-//     cookie: { secure: true, httpOnly: true, sameSite: "none" },
-//     httpOnly: true,
-//     sameSite: "none",
-//     secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-//   })
-// );
 app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY,
@@ -47,14 +35,17 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: true,
-      sameSite: 'none',
+      sameSite: "none",
       // domain: "chopchop-url.vercel.app",
     },
-  })
+  }),
 );
 
 const enforceHTTPS = (req, res, next) => {
-  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+  if (
+    req.headers["x-forwarded-proto"] !== "https" &&
+    process.env.NODE_ENV === "production"
+  ) {
     return res.redirect(`https://${req.headers.host}${req.url}`);
   }
   next();
@@ -91,13 +82,13 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       // Here you can handle user profile data
       return done(null, profile);
-    }
-  )
+    },
+  ),
 );
 
 // Custom middleware to generate JWT token and store it in a session cookie
@@ -114,20 +105,23 @@ const generateTokenMiddleware = (req, res, next) => {
   });
   req.session.token = token; // Store token in session
 
-  res.cookie('token', token, {
+  res.cookie("token", token, {
     // path: "/",
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
     maxAge: 100 * 60 * 60 * 48,
     // domain: "chopchop-url.vercel.app",
   });
   // next();
 
   res.redirect(process.env.FRONT_URL + "?token=" + token);
-
 };
 
 //AUTH ROUTES ------------------------------------------
+app.get("/helloServer", (req, res) => {
+  res.status(200).json({ OK: "Hello Frontend" });
+});
+
 app.get(
   "/auth/github",
   passport.authenticate("github", { scope: ["user:email"] }),
@@ -141,55 +135,20 @@ app.get(
   },
 );
 app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
 app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
   generateTokenMiddleware,
   (req, res) => {
     // Successful authentication, redirect to home.
     // res.redirect(process.env.FRONT_URL);
-  }
+  },
 );
 
-
-// Route to handle user data retrieval based on token
-//!No funciona el get porque no se mandan las cookies xd
-// app.get("/user", (req, res) => {
-//   // res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL); // Allow requests from any origin
-//   // res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials (cookies, authorization headers)
-//   const token = String(req.cookies.token);
-//   console.log("TOKEN: " + req.cookies.token);
-
-//   const token2 = req.headers.cookie;
-//   console.log("token 2" + token2);
-
-
-//   if (!token) {
-//     return res.status(401).json({ error: "Unauthorized" });
-//   }
-
-//   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-//     if (err) {
-//       return res.status(401).json({ error: "Invalid token" });
-//     }
-
-//     // Token is valid, extract user information from decoded token
-//     const userData = decoded;
-
-//     const returned = {
-//       id: userData?.id,
-//       username: userData?.username,
-//       name: userData?.displayName,
-//       avatarUrl: userData?.photos[0]?.value || null,
-//     };
-
-//     res.status(200).json(returned);
-//   });
-// });
 app.post("/user", (req, res) => {
   const token = req.body.token;
   if (!token) {
@@ -413,7 +372,7 @@ const updateVisit = (linkId) => {
 
     db.collection("links")
       .updateOne({ _id: updateId }, { $inc: { numClicks: 1 } })
-      .then((response) => { });
+      .then((response) => {});
   }
 };
 

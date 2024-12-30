@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next";
 import Login from "../components/Login";
 import UrlInputField from "../components/UrlInputField";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_BACK_URL}/helloServer`);
+  }, []);
 
   return (
     <section className="flex flex-col items-center justify-center gap-14 p-5 text-center">

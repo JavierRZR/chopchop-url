@@ -29,7 +29,9 @@
     "notification": {
       "copiedToCB": "Copiado en el portapeles",
       "successLinkCreate": "Enlace chopeado correctamente!",
-      "error": "Ha ocurrido un error."
+      "error": "Ha ocurrido un error.",
+      "serverLoaderTitle": "Iniciando servidor...",
+      "serverLoader": "Espere por favor, al ser un proyecto de práctica está alojado con el minimo costo y puede demorarse en el inicio. Gracias por su visita :D"
     },
     "forms": {
       "createLink": {

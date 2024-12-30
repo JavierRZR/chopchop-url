@@ -26,7 +26,7 @@ const Dashboard = () => {
       .then((response) => {
         setInitialLinks(response.data.links);
       });
-  }, [user]);
+  }, [user, setInitialLinks]);
 
   return (
     <section className="flex w-full flex-col gap-5">
