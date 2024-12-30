@@ -81,7 +81,7 @@ const Login: React.FC<{ type?: string }> = ({ type = "login" }) => {
       {!user && (
         <>
           <Button onClick={loginWithGitHub}>
-            {text}
+            {text + " github"}
             <ArrowRightIcon size={20} color="#888" />
           </Button>
           <Button onClick={loginWithGoogle}>
